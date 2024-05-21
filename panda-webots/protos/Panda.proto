@@ -1,0 +1,431 @@
+#VRML_SIM R2023b utf8
+# license: Apache License 2.0
+# license url: http://www.apache.org/licenses/LICENSE-2.0
+# This is a proto file for Webots for the Panda
+# Extracted from: /root/catkin_ws/src/robotics-toolbox-python/rtb-data/rtbdata/xacro/franka_description/robots/panda.urdf
+
+PROTO Panda [
+  field  SFVec3f     translation     0 0 0
+  field  SFRotation  rotation        0 0 1 0
+  field  SFString    name            "Panda"  # Is `Robot.name`.
+  field  SFString    controller      "void"   # Is `Robot.controller`.
+  field  MFString    controllerArgs  []       # Is `Robot.controllerArgs`.
+  field  SFString    customData      ""       # Is `Robot.customData`.
+  field  SFBool      supervisor      FALSE    # Is `Robot.supervisor`.
+  field  SFBool      synchronization TRUE     # Is `Robot.synchronization`.
+  field  SFBool      selfCollision   FALSE    # Is `Robot.selfCollision`.
+  field  MFNode      toolSlot        []       # Extend the robot with new nodes at the end of the arm.
+]
+{
+  Robot {
+    translation IS translation
+    rotation IS rotation
+    controller IS controller
+    controllerArgs IS controllerArgs
+    customData IS customData
+    supervisor IS supervisor
+    synchronization IS synchronization
+    selfCollision IS selfCollision
+    children [
+      DEF link0_visual CadShape {
+        url "../meshes/visual/link0.dae"
+      }
+      HingeJoint {
+        jointParameters HingeJointParameters {
+          axis 0.000000 0.000000 1.000000
+          anchor 0.000000 0.000000 0.333000
+        }
+        device [
+          RotationalMotor {
+            name "panda_joint1"
+            maxVelocity 2.175
+            minPosition -2.8973
+            maxPosition 2.8973
+            maxTorque 87.0
+          }
+          PositionSensor {
+            name "panda_joint1_sensor"
+          }
+        ]
+        endPoint Solid {
+          translation 0.000000 0.000000 0.333000
+          children [
+            DEF link1_visual CadShape {
+              url "../meshes/visual/link1.dae"
+            }
+            HingeJoint {
+              jointParameters HingeJointParameters {
+                axis 0.000000 1.000000 0.000000
+              }
+              device [
+                RotationalMotor {
+                  name "panda_joint2"
+                  maxVelocity 2.175
+                  minPosition -1.7628
+                  maxPosition 1.7628
+                  maxTorque 87.0
+                }
+                PositionSensor {
+                  name "panda_joint2_sensor"
+                }
+              ]
+              endPoint Solid {
+                rotation -1.000000 0.000000 0.000000 1.570796
+                children [
+                  DEF link2_visual CadShape {
+                    url "../meshes/visual/link2.dae"
+                  }
+                  HingeJoint {
+                    jointParameters HingeJointParameters {
+                      axis 0.000000 -1.000000 0.000000
+                      anchor 0.000000 -0.316000 0.000000
+                    }
+                    device [
+                      RotationalMotor {
+                        name "panda_joint3"
+                        maxVelocity 2.175
+                        minPosition -2.8973
+                        maxPosition 2.8973
+                        maxTorque 87.0
+                      }
+                      PositionSensor {
+                        name "panda_joint3_sensor"
+                      }
+                    ]
+                    endPoint Solid {
+                      translation 0.000000 -0.316000 0.000000
+                      rotation 1.000000 0.000000 0.000000 1.570796
+                      children [
+                        DEF link3_visual CadShape {
+                          url "../meshes/visual/link3.dae"
+                        }
+                        HingeJoint {
+                          jointParameters HingeJointParameters {
+                            position -1.570800
+                            axis 0.000000 -1.000000 0.000000
+                            anchor 0.082500 0.000000 0.000000
+                          }
+                          device [
+                            RotationalMotor {
+                              name "panda_joint4"
+                              maxVelocity 2.175
+                              minPosition -3.0718
+                              maxPosition -0.0698
+                              maxTorque 87.0
+                            }
+                            PositionSensor {
+                              name "panda_joint4_sensor"
+                            }
+                          ]
+                          endPoint Solid {
+                            translation 0.082500 0.000000 0.000000
+                            rotation 0.577349 0.577351 -0.577351 2.094397
+                            children [
+                              DEF link4_visual CadShape {
+                                url "../meshes/visual/link4.dae"
+                              }
+                              HingeJoint {
+                                jointParameters HingeJointParameters {
+                                  axis 0.000000 1.000000 0.000000
+                                  anchor -0.082500 0.384000 0.000000
+                                }
+                                device [
+                                  RotationalMotor {
+                                    name "panda_joint5"
+                                    maxVelocity 2.61
+                                    minPosition -2.8973
+                                    maxPosition 2.8973
+                                    maxTorque 12.0
+                                  }
+                                  PositionSensor {
+                                    name "panda_joint5_sensor"
+                                  }
+                                ]
+                                endPoint Solid {
+                                  translation -0.082500 0.384000 0.000000
+                                  rotation -1.000000 0.000000 0.000000 1.570796
+                                  children [
+                                    DEF link5_visual CadShape {
+                                      url "../meshes/visual/link5.dae"
+                                    }
+                                    HingeJoint {
+                                      jointParameters HingeJointParameters {
+                                        axis 0.000000 -1.000000 0.000000
+                                      }
+                                      device [
+                                        RotationalMotor {
+                                          name "panda_joint6"
+                                          maxVelocity 2.61
+                                          minPosition -0.0175
+                                          maxPosition 3.7525
+                                          maxTorque 12.0
+                                        }
+                                        PositionSensor {
+                                          name "panda_joint6_sensor"
+                                        }
+                                      ]
+                                      endPoint Solid {
+                                        rotation 1.000000 0.000000 0.000000 1.570796
+                                        children [
+                                          DEF link6_visual CadShape {
+                                            url "../meshes/visual/link6.dae"
+                                          }
+                                          HingeJoint {
+                                            jointParameters HingeJointParameters {
+                                              axis 0.000000 -1.000000 0.000000
+                                              anchor 0.088000 0.000000 0.000000
+                                            }
+                                            device [
+                                              RotationalMotor {
+                                                name "panda_joint7"
+                                                maxVelocity 2.61
+                                                minPosition -2.8973
+                                                maxPosition 2.8973
+                                                maxTorque 12.0
+                                              }
+                                              PositionSensor {
+                                                name "panda_joint7_sensor"
+                                              }
+                                            ]
+                                            endPoint Solid {
+                                              translation 0.088000 0.000000 0.000000
+                                              rotation 1.000000 0.000000 0.000000 1.570796
+                                              children [
+                                                DEF link7_visual CadShape {
+                                                  url "../meshes/visual/link7.dae"
+                                                }
+                                                Solid {
+                                                  translation 0.000000 0.000000 0.107000
+                                                  children [
+                                                    Solid {
+                                                      rotation 0.000000 0.000000 -1.000000 0.785398
+                                                      children [
+                                                        DEF hand_visual CadShape {
+                                                          url "../meshes/visual/hand.dae"
+                                                        }
+                                                      ]
+                                                      name "panda_hand"
+                                                      boundingObject Group {
+                                                        children [
+                                                          Cylinder {
+                                                            radius 0.04
+                                                            height 0.1
+                                                          }
+                                                          Sphere {
+                                                            radius 0.04
+                                                          }
+                                                          Sphere {
+                                                            radius 0.04
+                                                          }
+                                                          Cylinder {
+                                                            radius 0.02
+                                                            height 0.1
+                                                          }
+                                                          Sphere {
+                                                            radius 0.02
+                                                          }
+                                                          Sphere {
+                                                            radius 0.02
+                                                          }
+                                                        ]
+                                                      }
+                                                      physics Physics {
+                                                      }
+                                                    }
+                                                    Group {
+                                                      children IS toolSlot
+                                                    }
+                                                  ]
+                                                  physics Physics {
+                                                  }
+                                                  boundingObject Box {
+                                                    size 0.01 0.01 0.01
+                                                  }
+                                                  name "panda_link8"
+                                                  boundingObject Group {
+                                                    children [
+                                                      Cylinder {
+                                                        radius 0.03
+                                                        height 0.01
+                                                      }
+                                                      Sphere {
+                                                        radius 0.03
+                                                      }
+                                                      Sphere {
+                                                        radius 0.03
+                                                      }
+                                                    ]
+                                                  }
+                                                  physics Physics {
+                                                  }
+                                                }
+                                              ]
+                                              name "panda_link7"
+                                              boundingObject Group {
+                                                children [
+                                                  Cylinder {
+                                                    radius 0.04
+                                                    height 0.14
+                                                  }
+                                                  Sphere {
+                                                    radius 0.025
+                                                  }
+                                                  Sphere {
+                                                    radius 0.04
+                                                  }
+                                                ]
+                                              }
+                                              physics Physics {
+                                              }
+                                            }
+                                          }
+                                        ]
+                                        name "panda_link6"
+                                        boundingObject Group {
+                                          children [
+                                            Cylinder {
+                                              radius 0.05
+                                              height 0.08
+                                            }
+                                            Sphere {
+                                              radius 0.05
+                                            }
+                                            Sphere {
+                                              radius 0.05
+                                            }
+                                          ]
+                                        }
+                                        physics Physics {
+                                        }
+                                      }
+                                    }
+                                  ]
+                                  name "panda_link5"
+                                  boundingObject Group {
+                                    children [
+                                      Cylinder {
+                                        radius 0.06
+                                        height 0.1
+                                      }
+                                      Sphere {
+                                        radius 0.06
+                                      }
+                                      Sphere {
+                                        radius 0.06
+                                      }
+                                      Cylinder {
+                                        radius 0.025
+                                        height 0.14
+                                      }
+                                      Sphere {
+                                        radius 0.025
+                                      }
+                                      Sphere {
+                                        radius 0.025
+                                      }
+                                    ]
+                                  }
+                                  physics Physics {
+                                  }
+                                }
+                              }
+                            ]
+                            name "panda_link4"
+                            boundingObject Group {
+                              children [
+                                Cylinder {
+                                  radius 0.06
+                                  height 0.12
+                                }
+                                Sphere {
+                                  radius 0.06
+                                }
+                                Sphere {
+                                  radius 0.06
+                                }
+                              ]
+                            }
+                            physics Physics {
+                            }
+                          }
+                        }
+                      ]
+                      name "panda_link3"
+                      boundingObject Group {
+                        children [
+                          Cylinder {
+                            radius 0.06
+                            height 0.15
+                          }
+                          Sphere {
+                            radius 0.06
+                          }
+                          Sphere {
+                            radius 0.06
+                          }
+                        ]
+                      }
+                      physics Physics {
+                      }
+                    }
+                  }
+                ]
+                name "panda_link2"
+                boundingObject Group {
+                  children [
+                    Cylinder {
+                      radius 0.06
+                      height 0.12
+                    }
+                    Sphere {
+                      radius 0.06
+                    }
+                    Sphere {
+                      radius 0.06
+                    }
+                  ]
+                }
+                physics Physics {
+                }
+              }
+            }
+          ]
+          name "panda_link1"
+          boundingObject Group {
+            children [
+              Cylinder {
+                radius 0.06
+                height 0.283
+              }
+              Sphere {
+                radius 0.06
+              }
+              Sphere {
+                radius 0.06
+              }
+            ]
+          }
+          physics Physics {
+          }
+        }
+      }
+    ]
+    name IS name
+    boundingObject Group {
+      children [
+        Cylinder {
+          radius 0.06
+          height 0.03
+        }
+        Sphere {
+          radius 0.06
+        }
+        Sphere {
+          radius 0.06
+        }
+      ]
+    }
+    physics Physics {
+    }
+  }
+}
