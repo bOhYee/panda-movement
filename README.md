@@ -1,7 +1,7 @@
 # How to automate the movement of the Panda in Webots
 This repository has been built with the goal of providing users with a step-by-step process to automate the movement of the Franka-Emika Panda's robotic arm in [Webots](https://cyberbotics.com/#webots). This is particularly important for projects that place the end-effector of the arm in random, or not known in advance, locations. In such cases, in fact, the joints' angles cannot be computed beforehand, thus requiring a different approach to be adopted.
 
-This guide will make use of the [Robotics Toolbox for Python](https://github.com/petercorke/robotics-toolbox-python) library, which provides tools for managing kinematic operations for a set of robotic arms. Between the supported models, there is also the [Franka-Emika Panda](https://petercorke.github.io/robotics-toolbox-python/arm_dh.html#roboticstoolbox.models.DH.Panda), which was based on the URDF file contained inside [franka_ros](https://frankaemika.github.io/docs/control_parameters.html) package. The base idea is to provide the library with the joints' current position and the movement's information and, then, to harness its ability to solve the inverse kinematic equations for the Panda manipulator to obtain the final angles, which will be used inside the simulated environment.
+This guide will make use of the [Robotics Toolbox for Python](https://github.com/petercorke/robotics-toolbox-python) library, which provides tools for managing kinematic operations for a set of robotic arms. Between the supported models, there is also the [Franka-Emika Panda](https://petercorke.github.io/robotics-toolbox-python/arm_dh.html#roboticstoolbox.models.DH.Panda), which was based on the URDF file contained inside [franka_ros](https://frankaemika.github.io/docs/control_parameters.html) package. The base idea is to provide the library with the joints' current position and the movement's information and then to harness its ability to solve the inverse kinematic equations for the Panda manipulator to obtain the final angles, which will be used inside the simulated environment.
 
 Unfortunately, as of Webots version R2023b, the arm model contained inside the Python library differs from the one included inside Webots. The two of them, in fact, present different rotating axes for some of the joints, making it difficult to adopt the computed results without further elaborations. To remedy this issue, the model used by the library can be compiled from scratch and imported as a new Robot entity to be controlled in Webots. You can either follow the procedure reported in the [following section](#creating-the-panda-proto-file)  to generate the new entity or include the [provided PROTO file](./panda-webots/protos/Panda.proto) contained in this repository inside your simulated world. 
 
@@ -24,7 +24,7 @@ After having installed both tools, recover the files used to describe the Panda 
 git clone https://github.com/petercorke/robotics-toolbox-python.git
 cd robotics-toolbox-python
 ```
-The needed files can be found in `rtb-data/rtbdata/xacro/franka_description/`. Here, two folders are present: "meshes" contains the `.dae` files used by Webots to graphically render the joints of the robot, whereas the "robots" folder holds the `.xacro` file which describes how the joints are connected to form the arm. Between all the descriptions, for our case, only the `panda_arm_hand.urdf.xacro`, `panda_arm.xacro` and `hand.xacro` are required. To compile the xacros of the arm into an URDF description, use the reported command:
+The needed files can be found in `rtb-data/rtbdata/xacro/franka_description/`. Here, two folders are present: `meshes` contains the `.dae` files used by Webots to graphically render the joints of the robot, whereas the `robots` folder holds the `.xacro` file which describes how the joints are connected to form the arm. Between all the descriptions, for our case, only the `panda_arm_hand.urdf.xacro`, `panda_arm.xacro` and `hand.xacro` are required. To compile the xacros of the arm into an URDF description, use the reported command:
 ```
 rosrun xacro xacro -o panda.urdf panda_arm_hand.urdf.xacro
 ```
@@ -43,9 +43,9 @@ For more information about the possible accepted arguments, check the [urdf2webo
 >The urdf2webots importer cannot generate the PROTO description for the fingers of the gripper. This is not a problem though, as they can later be added manually or by copying their structure from the official arm model.
 
 ## Importing the PROTO inside your Webots project
-All that remains to do is to instantiate this new entity in Webots. To accomplish this, first, copy the "meshes" folder of the robotics library inside the root of your Webots project. Inside it, you should have a "visual" folder with several `.dae` files, used to render the Robot in the virtual environment.
+All that remains to do is to instantiate this new entity in Webots. To accomplish this, first, copy the `meshes` folder of the robotics library inside the root of your Webots project. Inside it, you should have a `visual` folder with several `.dae` files, used to render the Robot in the virtual environment.
 
-Next, copy the `Panda.proto` file, built through the previously explained procedure, inside the "protos" folder of your project. Open it and edit all the URLs, in order for them to point to the location where the meshes are stored.
+Next, copy the `Panda.proto` file, built through the previously explained procedure, inside the `protos` folder of your project. Open it and edit all the URLs, in order for them to point to the location where the meshes are stored.
 
 At the end of these steps, you should have a similar project structure:
 ```
@@ -78,7 +78,8 @@ Open your Webots project and press the "Add a node" button. Under "PROTO nodes (
 
 !["Add a node" expected output](./img/add_a_node_menu.png)
 
-To add the fingers of the gripper to the robot, convert the PROTO into base nodes and under the `panda_hand` node add as childrens the finger nodes by copying them from the official model.
+To add the fingers of the gripper to the robot, it is necessary to convert the PROTO into base nodes. To do this, right click on the Panda module and select the "Convert to Base Node(s)" option.
+Scroll through the chain of nodes until you reach the `panda_hand` one. Add to the list of its children the finger nodes by copying them from the official model.
 
 ![Gripper with fingers tree](./img/gripper_wfingers.png)
 
